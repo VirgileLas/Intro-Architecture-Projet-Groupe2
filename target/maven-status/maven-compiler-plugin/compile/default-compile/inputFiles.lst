@@ -1,5 +1,11 @@
 /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/QuizApplication.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/component/QuizSession.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/controller/AuthController.java
 /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/controller/QuizController.java
 /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/controller/SpringQuizController.java
 /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/model/Question.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/model/Session.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/model/User.java
 /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/service/MathQuestionMaker.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/service/SessionManager.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/QuizDemo/src/main/java/org/example/quiz/service/UserRegistry.java
