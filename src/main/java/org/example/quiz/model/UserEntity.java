@@ -1,10 +1,15 @@
 package org.example.quiz.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -29,10 +34,19 @@ public class UserEntity {
     private String username;
 
     @Column(nullable = false, length = 255)
-    private String password;  // En production : BCrypt hash !
+    private String password;  
 
     @Column(nullable = false, length = 20)
     private String authority;  // Ex: "USER", "ADMIN"
+
+    /**
+     * Relation OneToMany vers les sessions de l'utilisateur.
+     * - CascadeType.ALL : toutes les opérations (persist, merge, remove...) sont propagées
+     * - orphanRemoval = true : supprime les sessions orphelines (sans utilisateur)
+     * → Quand on supprime un user, toutes ses sessions sont supprimées automatiquement !
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SessionEntity> sessions = new ArrayList<>();
 
     // ==================== Constructeurs ====================
 

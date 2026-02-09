@@ -46,7 +46,7 @@ public class UserRegistry {
             register("alice", "password123", "USER");
             register("bob", "secret456", "USER");
             register("admin", "admin", "ADMIN");
-            System.out.println("✅ Utilisateurs de test créés en base H2");
+            System.out.println(" Utilisateurs de test créés en base H2");
         }
     }
 

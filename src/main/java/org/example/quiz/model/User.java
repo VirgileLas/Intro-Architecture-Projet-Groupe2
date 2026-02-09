@@ -6,6 +6,6 @@ package org.example.quiz.model;
  */
 public record User(
     String username,
-    String password,  // En production, ce serait un hash !
-    String authority  // Ex: "USER", "ADMIN"
+    String password,  
+    String authority
 ) {}

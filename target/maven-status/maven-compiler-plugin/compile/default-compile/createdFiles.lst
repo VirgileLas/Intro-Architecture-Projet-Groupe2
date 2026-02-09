@@ -13,6 +13,7 @@ org/example/quiz/controller/SpringQuizController$ReplyResult.class
 org/example/quiz/controller/QuizController.class
 org/example/quiz/model/UserEntity.class
 org/example/quiz/controller/SpringQuizController.class
+org/example/quiz/controller/DatabaseController.class
 org/example/quiz/controller/AuthController$LoginResponse.class
 org/example/quiz/service/UserRegistry.class
 org/example/quiz/controller/SpringQuizController$ReplyError.class

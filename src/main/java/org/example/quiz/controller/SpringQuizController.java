@@ -1,12 +1,19 @@
 package org.example.quiz.controller;
 
+import java.util.Optional;
+
 import org.example.quiz.component.QuizSession;
 import org.example.quiz.model.Question;
+import org.example.quiz.model.Session;
 import org.example.quiz.service.MathQuestionMaker;
+import org.example.quiz.service.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,34 +24,59 @@ public class SpringQuizController {
 
     private final MathQuestionMaker questionMaker;
     private final QuizSession quizSession;
+    private final SessionManager sessionManager;
 
     // 1. INJECTION DE DÉPENDANCE
-    // On injecte le MathQuestionMaker (Service Singleton) ET le QuizSession (Composant Session Scoped).
-    // Spring gère magiquement le scope session : quizSession est un proxy qui pointe vers l'objet de l'utilisateur courant.
+    // On injecte le MathQuestionMaker, QuizSession ET SessionManager pour vérifier les tokens.
     @Autowired
-    public SpringQuizController(MathQuestionMaker questionMaker, QuizSession quizSession) {
+    public SpringQuizController(MathQuestionMaker questionMaker, QuizSession quizSession, SessionManager sessionManager) {
         this.questionMaker = questionMaker;
         this.quizSession = quizSession;
+        this.sessionManager = sessionManager;
+    }
+
+    /**
+     * Vérifie le token Bearer et retourne la session si valide.
+     */
+    private Optional<Session> extractAndVerifyToken(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return Optional.empty();
+        }
+        String token = authHeader.substring(7);
+        return sessionManager.verify(token);
     }
 
     // 2. SÉPARATION DES RESPONSABILITÉS (ENDPOINT)
     
     @GetMapping("/next")
-    public QuestionDTO getNextQuestion() {
+    public ResponseEntity<?> getNextQuestion(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        // VÉRIFICATION DU TOKEN
+        Optional<Session> session = extractAndVerifyToken(authHeader);
+        if (session.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ReplyError("Token manquant ou invalide. Connectez-vous via /api/auth/login"));
+        }
+
         // Logique métier déléguée au service
         Question q = questionMaker.createNewQuestion();
         
-        // 3. GESTION DE L'ÉTAT (SESSION BEAN)
-        // On utilise le bean session scoppé au lieu de manipuler directement la map HttpSession.
-        // C'est plus typé et plus propre.
+        // GESTION DE L'ÉTAT (SESSION BEAN)
         quizSession.setCurrentQuestion(q);
         
-        // 4. DTO (Data Transfer Object) AUTOMATIQUE
-        return new QuestionDTO(q.text, q.options);
+        // DTO (Data Transfer Object) AUTOMATIQUE
+        return ResponseEntity.ok(new QuestionDTO(q.text, q.options));
     }
 
     @PostMapping("/reply")
-    public ReplyResult checkAnswer(@RequestParam int guess) {
+    public ResponseEntity<?> checkAnswer(@RequestParam int guess,
+                                         @RequestHeader(value = "Authorization", required = false) String authHeader) {
+        // VÉRIFICATION DU TOKEN
+        Optional<Session> session = extractAndVerifyToken(authHeader);
+        if (session.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ReplyError("Token manquant ou invalide. Connectez-vous via /api/auth/login"));
+        }
+
         Question q = quizSession.getCurrentQuestion();
         
         if (q == null) {
@@ -52,9 +84,9 @@ public class SpringQuizController {
         }
         
         if (guess == q.result) {
-            return new ReplyResult("CORRECT", null);
+            return ResponseEntity.ok(new ReplyResult("CORRECT", null));
         } else {
-            return new ReplyResult("WRONG", q.result);
+            return ResponseEntity.ok(new ReplyResult("WRONG", q.result));
         }
     }
 

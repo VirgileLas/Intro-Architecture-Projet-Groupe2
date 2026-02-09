@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * SERVICE API
- * Controller REST pour l'authentification (login, verify, logout).
- * Sans dépendance externe - sécurité minimale pour projet universitaire.
+ * CONTROLLER - Gère l'authentification des utilisateurs.
+ * 
+ * ENDPOINTS :
+ * - POST /api/auth/login     : Authentifie et crée une session
+ * - GET  /api/auth/verify    : Vérifie la validité d'un token
+ * - POST /api/auth/logout    : Invalide une session
+ * - POST /api/auth/register  : Enregistre un nouvel utilisateur (optionnel)
+ * 
+ * Utilise UserRegistry pour la gestion des utilisateurs
+ * et SessionManager pour la gestion des sessions.
  */
 @RestController
 @RequestMapping("/api/auth")

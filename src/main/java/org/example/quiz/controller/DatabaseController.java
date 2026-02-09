@@ -3,9 +3,12 @@ package org.example.quiz.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.example.quiz.model.Session;
 import org.example.quiz.model.UserEntity;
+import org.example.quiz.service.SessionManager;
 import org.example.quiz.service.UserRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +23,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class DatabaseController {
 
     private final UserRegistry userRegistry;
+    private final SessionManager sessionManager;
 
     @Autowired
-    public DatabaseController(UserRegistry userRegistry) {
+    public DatabaseController(UserRegistry userRegistry, SessionManager sessionManager) {
         this.userRegistry = userRegistry;
+        this.sessionManager = sessionManager;
+    }
+
+    /**
+     * Vérifie le token Bearer et retourne la session si valide.
+     */
+    private Optional<Session> extractAndVerifyToken(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return Optional.empty();
+        }
+        String token = authHeader.substring(7);
+        return sessionManager.verify(token);
     }
 
     /**
@@ -45,20 +61,5 @@ public class DatabaseController {
             .collect(Collectors.toList()));
         
         return response;
-    }
-
-    /**
-     * Statistiques de la base
-     * GET http://localhost:8080/api/db/stats
-     */
-    @GetMapping("/stats")
-    public Map<String, Object> getStats() {
-        Map<String, Object> stats = new HashMap<>();
-        stats.put("totalUsers", userRegistry.count());
-        stats.put("database", "H2 (in-memory)");
-        stats.put("url", "jdbc:h2:mem:quizdb");
-        stats.put("status", "✅ Connected");
-        
-        return stats;
     }
 }
