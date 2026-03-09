@@ -1,0 +1,5 @@
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/src/main/java/com/projet/notification/listener/NotificationListener.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/src/main/java/com/projet/notification/config/RabbitMQConfig.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/src/main/java/com/projet/notification/dto/UserRegisteredEvent.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/src/main/java/com/projet/notification/service/EmailService.java
+/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/src/main/java/com/projet/notification/NotificationApplication.java

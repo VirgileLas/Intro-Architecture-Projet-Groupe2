@@ -1,0 +1,12 @@
+org/example/logger/model/Session.class
+org/example/logger/model/Authority.class
+org/example/logger/LoggerApplication.class
+org/example/logger/model/User.class
+org/example/logger/model/Credentials.class
+org/example/logger/service/SessionManager.class
+org/example/logger/controller/AuthController.class
+org/example/logger/controller/AuthController$RegisterResponse.class
+org/example/logger/controller/AuthController$LogoutResponse.class
+org/example/logger/controller/AuthController$VerifyResponse.class
+org/example/logger/controller/AuthController$LoginResponse.class
+org/example/logger/service/UserRegistry.class

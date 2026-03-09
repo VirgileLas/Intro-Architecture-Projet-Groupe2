@@ -1,0 +1,50 @@
+============= INFRASTRUCTURE =============
+
+[NGINX - Proxy Principal]
+Point d'entrée de votre application : http://localhost:8080/
+(Toutes vos requêtes doivent désormais passer par lui)
+
+[RABBITMQ - Courtier de Messages]
+Interface d'administration : http://localhost:15672
+Identifiants : guest / guest
+
+[MAILHOG - Faux Serveur Email]
+Boîte de réception locale : http://localhost:8025/
+
+
+============= BASE DE DONNEES =============
+
+Console d'administration H2
+URL : http://localhost:8080/h2-console
+JDBC URL : jdbc:h2:file:./data/userdb
+Username : sa  
+Password : password
+
+
+============= API - ENDPOINTS DU PROJET =============
+(Ces adresses sont accessibles directement via Nginx sur le port 8080)
+
+1. Enregistrer un utilisateur (POST)
+http://localhost:8080/api/auth/register?username=votre_pseudo&password=votre_mot_de_passe
+
+2. Se connecter (POST)
+http://localhost:8080/api/auth/login?username=votre_pseudo&password=votre_mot_de_passe
+
+3. Se déconnecter (POST)
+http://localhost:8080/api/auth/logout?token=VOTRE_TOKEN_DE_SESSION
+
+4. Valider son email manuellement (GET)
+http://localhost:8080/api/auth/verify?token=VOTRE_TOKEN_DE_SESSION
+============= API - SERVICES PROTÉGÉS =============
+(Nécessite un Header HTTP 'Authorization: Bearer VOTRE_TOKEN')
+
+5. Accéder au Service A (GET)
+http://localhost:8080/service-a/
+
+6. Accéder au Service B (GET)
+http://localhost:8080/service-b/
+
+============= DEBUG =============
+
+7. Voir tous les utilisateurs et leurs statuts (GET)
+http://localhost:8080/api/auth/users

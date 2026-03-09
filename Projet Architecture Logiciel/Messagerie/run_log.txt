@@ -1,0 +1,78 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.projet:notification >-----------------------
+[INFO] Building notification 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.3:run (default-cli) > test-compile @ notification >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ notification ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ notification ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ notification ---
+[INFO] skip non existing resourceDirectory /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ notification ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.3:run (default-cli) < test-compile @ notification <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.3:run (default-cli) @ notification ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2026-03-09T02:10:52.996+01:00  INFO 48361 --- [           main] c.p.n.NotificationApplication            : Starting NotificationApplication using Java 25 with PID 48361 (/Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie/target/classes started by virgilelassagne in /Users/virgilelassagne/Desktop/COURS VIRGILE/2EME SEMESTRE/ARCHITECTURE/Projet Architecture Logiciel/Messagerie)
+2026-03-09T02:10:52.997+01:00  INFO 48361 --- [           main] c.p.n.NotificationApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-03-09T02:10:53.301+01:00  INFO 48361 --- [           main] o.s.a.r.c.CachingConnectionFactory       : Attempting to connect to: [localhost:5672]
+2026-03-09T02:10:53.321+01:00  INFO 48361 --- [           main] o.s.a.r.c.CachingConnectionFactory       : Created new connection: rabbitConnectionFactory#6c575325:0/SimpleConnection@a098d76 [delegate=amqp://guest@127.0.0.1:5672/, localPort=55020]
+2026-03-09T02:10:53.348+01:00  INFO 48361 --- [           main] c.p.n.NotificationApplication            : Started NotificationApplication in 0.449 seconds (process running for 0.539)
+2026-03-09T02:13:26.952+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 57f690dd-c515-4754-8e42-a33154d7c8df] Event d5fbc19c-f2cb-4cbd-a0f9-57ae17515354 received for user alice
+2026-03-09T02:13:26.953+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : alice@example.com
+2026-03-09T02:13:27.006+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:13:27.007+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 931a2f3a-4516-4efe-a186-d98189e25a3e] Event b3956235-0090-41b6-b877-3a891468ea25 received for user admin
+2026-03-09T02:13:27.008+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : admin@example.com
+2026-03-09T02:13:27.014+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:14:18.810+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 037236ba-e97b-463f-83ab-aa21735a41e6] Event 89c5dea8-28a4-4c33-be45-3b8e89596450 received for user nouveau_test
+2026-03-09T02:14:18.810+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : nouveau_test@example.com
+2026-03-09T02:14:18.832+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:15:23.630+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: a340e7bd-1551-4270-a2dd-734e40ede16a] Event afce1e0a-c79d-4a7b-84c0-0e2b403541d9 received for user bob
+2026-03-09T02:15:23.630+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : bob@example.com
+2026-03-09T02:15:23.655+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:15:42.610+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 3bd0faba-8323-4be6-a6eb-2590d8d56ee5] Event 6ae5e6b7-5eed-42c8-9de6-e9a85e891094 received for user alice
+2026-03-09T02:15:42.610+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : alice@example.com
+2026-03-09T02:15:42.631+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:15:42.632+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 9b8219bb-8682-4da1-b8f6-ac0e9d027187] Event 9767f8cd-0e7c-48c1-917a-9c8f0a3115d7 received for user admin
+2026-03-09T02:15:42.632+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : admin@example.com
+2026-03-09T02:15:42.639+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:30:53.016+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 2af299c4-24b0-4f43-aedf-b611825e1b16] Event d2d52395-f838-439c-907b-4329173abb96 received for user michel
+2026-03-09T02:30:53.016+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : michel@example.com
+2026-03-09T02:30:53.041+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+2026-03-09T02:38:16.940+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : [CorrelationID: 67cd853b-067b-4fee-9bd8-cf12d9f0fdbf] Event dacee057-05db-467c-894d-17f8932c9df0 received for user michel2
+2026-03-09T02:38:16.941+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Envoi de l'email de vérification à : michel2@example.com
+2026-03-09T02:38:16.975+01:00  INFO 48361 --- [ntContainer#0-1] c.p.n.listener.NotificationListener      : Email envoyé avec succès.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  39:55 min
+[INFO] Finished at: 2026-03-09T02:50:47+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.3:run (default-cli) on project notification: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

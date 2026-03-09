@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # Port d'écoute AMQP (pour Spring Boot)
+      - "15672:15672" # Port de l'interface d'administration Web
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025"   # Port SMTP (pour l'envoi d'emails depuis Spring Boot)
+      - "8025:8025"   # Port de la boîte de réception Web pour voir les emails
+
+volumes:
+  rabbitmq_data:

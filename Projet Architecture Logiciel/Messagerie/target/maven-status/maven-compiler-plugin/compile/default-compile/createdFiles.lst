@@ -1,0 +1,6 @@
+com/projet/notification/NotificationApplication.class
+com/projet/notification/service/EmailService.class
+com/projet/notification/dto/UserRegisteredEvent.class
+com/projet/notification/listener/NotificationListener.class
+com/projet/notification/dto/UserRegisteredEvent$EventData.class
+com/projet/notification/config/RabbitMQConfig.class

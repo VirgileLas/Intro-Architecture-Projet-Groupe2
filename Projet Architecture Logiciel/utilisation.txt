@@ -1,0 +1,70 @@
+=== GUIDE D'UTILISATION ET DE TEST DU PROJET ===
+
+Ce projet est basé sur une architecture Microservices avec Nginx servant d'API Gateway (port 8080).
+L'accès aux services internes est bloqué si vous n'êtes pas identifié et n'avez pas validé votre compte.
+
+--- TEST 1 : ÉCHEC D'ACCÈS SANS AUTHENTIFICATION ---
+Essayez d'accéder directement au Service A sans être connecté.
+Commande :
+curl -X GET http://localhost:8080/service-a/
+
+Résultat attendu : Nginx intercepte et refuse l'accès.
+{"error": "Unauthorized. You are either not registered, not enabled, or missing a valid token."}
+
+
+--- TEST 2 : CRÉER UN COMPTE (REGISTER) ---
+Enregistrez un nouvel utilisateur (ex: michel).
+Commande :
+curl -X POST "http://localhost:8080/api/auth/register?username=michel&password=123"
+
+Résultat attendu :
+{"success":true,"message":"User registered successfully"}
+
+Action requise : Cependant, le compte n'est pas "activé" (enabled=false). 
+Il a envoyé un évènement à RabbitMQ, qui a dit à Messagerie d'envoyer un mail.
+
+
+--- TEST 3 : VÉRIFICATION DE L'EMAIL ---
+Allez sur l'interface MailHog dans votre navigateur :
+http://localhost:8025
+
+- Cliquez sur le mail reçu pour "michel".
+- Cliquez sur le lien contenu dans le mail OU copiez son contenu et exécutez-le dans le terminal.
+Exemple:
+curl -X GET "http://localhost:8080/api/auth/verify?token=VOTRE_TOKEN_DE_VALIDATION"
+
+Résultat attendu :
+{"valid":true,"username":"michel","authority":"USER","error":null}
+Le compte de l'utilisateur est maintenant "Activé" en base de données H2 !
+
+
+--- TEST 4 : SE CONNECTER (LOGIN) ---
+Connectez-vous pour obtenir votre Token de Session (Bearer Token).
+Commande :
+curl -X POST "http://localhost:8080/api/auth/login?username=michel&password=123"
+
+Résultat attendu :
+{"success":true,"token":"VOTRE_TOKEN","authority":"USER","error":null}
+
+
+--- TEST 5 : SUCCÈS - ACCÈS AU SERVICE A (OU B) ---
+Utilisez votre token pour franchir la barrière Nginx et accéder au Service.
+(Remplacez LE_TOKEN_ICI par celui obtenu au Test 4)
+
+Commande :
+curl -H "Authorization: Bearer LE_TOKEN_ICI" http://localhost:8080/service-a/
+
+Résultat attendu :
+Hello A
+
+Commande pour le Service B :
+curl -H "Authorization: Bearer LE_TOKEN_ICI" http://localhost:8080/service-b/
+
+Résultat attendu :
+Hello B
+
+
+--- ANNEXE : DIAGNOSTIC DE LA BASE DE DONNÉES ---
+Pour voir tous les utilisateurs enregistrés en base H2 et leur statut (activé ou non) :
+Commande :
+curl -X GET http://localhost:8080/api/auth/users

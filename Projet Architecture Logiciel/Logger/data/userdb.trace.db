@@ -1,0 +1,28 @@
+2026-03-09 02:26:59.912931+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table users (username varchar(255) not null, name varchar(255), [*]value varchar(255), enabled boolean not null, primary key (username))"; attendu "identifier"
+Syntax error in SQL statement "create table users (username varchar(255) not null, name varchar(255), [*]value varchar(255), enabled boolean not null, primary key (username))"; expected "identifier"; SQL statement:
+create table users (username varchar(255) not null, name varchar(255), value varchar(255), enabled boolean not null, primary key (username)) [42001-240]
+2026-03-09 02:27:00.143874+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select count(*) from users u1_0 [42104-240]
+2026-03-09 02:27:36.119412+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table users (username varchar(255) not null, name varchar(255), [*]value varchar(255), enabled boolean not null, primary key (username))"; attendu "identifier"
+Syntax error in SQL statement "create table users (username varchar(255) not null, name varchar(255), [*]value varchar(255), enabled boolean not null, primary key (username))"; expected "identifier"; SQL statement:
+create table users (username varchar(255) not null, name varchar(255), value varchar(255), enabled boolean not null, primary key (username)) [42001-240]
+2026-03-09 02:27:36.456976+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found (this database is empty); SQL statement:
+select count(*) from users u1_0 [42104-240]
+2026-03-09 02:28:01.155968+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table app_user (username varchar(255) not null, name varchar(255), [*]value varchar(255), enabled boolean not null, primary key (username))"; attendu "identifier"
+Syntax error in SQL statement "create table app_user (username varchar(255) not null, name varchar(255), [*]value varchar(255), enabled boolean not null, primary key (username))"; expected "identifier"; SQL statement:
+create table app_user (username varchar(255) not null, name varchar(255), value varchar(255), enabled boolean not null, primary key (username)) [42001-240]
+2026-03-09 02:28:01.499007+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "APP_USER" not found (this database is empty); SQL statement:
+select count(*) from app_user u1_0 [42104-240]
+2026-03-09 02:28:40.580284+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table app_user (enabled boolean not null, name varchar(255), username varchar(255) not null, [*]value varchar(255), primary key (username))"; attendu "identifier"
+Syntax error in SQL statement "create table app_user (enabled boolean not null, name varchar(255), username varchar(255) not null, [*]value varchar(255), primary key (username))"; expected "identifier"; SQL statement:
+create table app_user (enabled boolean not null, name varchar(255), username varchar(255) not null, value varchar(255), primary key (username)) [42001-240]
+2026-03-09 02:28:40.909879+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "APP_USER" not found (this database is empty); SQL statement:
+select count(*) from app_user u1_0 [42104-240]
