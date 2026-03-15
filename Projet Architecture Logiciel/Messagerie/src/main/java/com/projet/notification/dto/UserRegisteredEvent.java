@@ -1,7 +1,5 @@
 package com.projet.notification.dto;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record UserRegisteredEvent(
         String type,

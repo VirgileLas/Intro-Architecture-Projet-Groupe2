@@ -7,7 +7,6 @@ spring:
         retry:
           enabled: true
           max-attempts: 3
-        # Obligatoire pour envoyer vers la DLQ après les tentatives d'échec
         default-requeue-rejected: false 
   mail:
     host: localhost

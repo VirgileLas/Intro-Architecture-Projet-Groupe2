@@ -64,7 +64,36 @@ Résultat attendu :
 Hello B
 
 
+--- TEST 6 : SE DÉCONNECTER (LOGOUT) ---
+Invalider une session active pour empêcher tout accès ultérieur.
+(Remplacez LE_TOKEN_ICI par celui obtenu au Test 4)
+
+Commande :
+curl -X POST -H "Authorization: Bearer LE_TOKEN_ICI" http://localhost:8080/api/auth/logout
+
+Résultat attendu :
+{"success":true,"message":"Session terminated"}
+(Note : Les administrateurs avec ROLE_ADMIN ne peuvent pas fermer leur session de cette manière).
+
+
+--- TEST 7 : GÉRER LES DROITS (ADMIN UNIQUEMENT) ---
+Récupérez d'abord un token administrateur en vous connectant avec les identifiants par défaut (admin/admin).
+
+Commande (pour obtenir le token ADMIN) :
+curl -X POST "http://localhost:8080/api/auth/login?username=admin&password=admin"
+
+Modifiez ensuite les droits d'un autre utilisateur en utilisant ce token (Remplacez LE_TOKEN_ADMIN par le token reçu juste au-dessus) (ex: retirer le droit ROLE_SERVICE_A).
+
+Commande :
+curl -X POST -H "Authorization: Bearer LE_TOKEN_ADMIN" "http://localhost:8080/api/auth/manage-roles?targetUsername=michel&action=remove&role=ROLE_SERVICE_A"
+
+Résultat attendu :
+Role ROLE_SERVICE_A successfully removeed for user michel
+
+
 --- ANNEXE : DIAGNOSTIC DE LA BASE DE DONNÉES ---
 Pour voir tous les utilisateurs enregistrés en base H2 et leur statut (activé ou non) :
+(Nécessite le Header HTTP 'Authorization: Bearer LE_TOKEN_ADMIN' ou celui d'un utilisateur avec ROLE_LOGGER)
+
 Commande :
-curl -X GET http://localhost:8080/api/auth/users
+curl -H "Authorization: Bearer LE_TOKEN_ADMIN" -X GET http://localhost:8080/api/auth/users

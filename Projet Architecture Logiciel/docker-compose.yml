@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   nginx:
     image: nginx:latest
@@ -11,7 +10,6 @@ services:
       - auth-service
     networks:
       - app-network
-
   rabbitmq:
     image: rabbitmq:3-management
     ports:
@@ -19,7 +17,6 @@ services:
       - "15672:15672"
     networks:
       - app-network
-
   mailhog:
     image: mailhog/mailhog
     ports:
@@ -27,18 +24,17 @@ services:
       - "8025:8025"
     networks:
       - app-network
-
   auth-service:
     build:
       context: ./Logger 
-    # REMARQUE : Plus de bloc 'ports:' ici ! Le service n'est plus accessible directement, uniquement via Nginx.
+    volumes:
+      - ./Logger/data:/app/data
     environment:
       - SPRING_RABBITMQ_HOST=rabbitmq
     depends_on:
       - rabbitmq
     networks:
       - app-network
-
   notification-service:
     build:
       context: ./Messagerie 
@@ -50,19 +46,16 @@ services:
       - mailhog
     networks:
       - app-network
-
   service-a:
     image: hashicorp/http-echo
     command: -text="Hello A" -listen=:8081
     networks:
       - app-network
-
   service-b:
     image: hashicorp/http-echo
     command: -text="Hello B" -listen=:8082
     networks:
       - app-network
-
 networks:
   app-network:
     driver: bridge

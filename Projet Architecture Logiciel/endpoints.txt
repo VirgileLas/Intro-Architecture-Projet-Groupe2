@@ -31,7 +31,8 @@ http://localhost:8080/api/auth/register?username=votre_pseudo&password=votre_mot
 http://localhost:8080/api/auth/login?username=votre_pseudo&password=votre_mot_de_passe
 
 3. Se déconnecter (POST)
-http://localhost:8080/api/auth/logout?token=VOTRE_TOKEN_DE_SESSION
+http://localhost:8080/api/auth/logout
+(Nécessite le Header HTTP 'Authorization: Bearer VOTRE_TOKEN')
 
 4. Valider son email manuellement (GET)
 http://localhost:8080/api/auth/verify?token=VOTRE_TOKEN_DE_SESSION
@@ -48,3 +49,12 @@ http://localhost:8080/service-b/
 
 7. Voir tous les utilisateurs et leurs statuts (GET)
 http://localhost:8080/api/auth/users
+(Nécessite le Header HTTP 'Authorization: Bearer VOTRE_TOKEN' avec le rôle ROLE_LOGGER ou ROLE_ADMIN)
+
+============= ADMINISTRATION =============
+(Nécessite le token d'un compte Administrateur)
+
+8. Gérer les rôles d'un utilisateur (POST)
+http://localhost:8080/api/auth/manage-roles?targetUsername=UTILISATEUR&action=add&role=NOM_DU_ROLE
+(Rôles possibles : ROLE_SERVICE_A, ROLE_SERVICE_B, ROLE_LOGGER, ROLE_MESSAGERIE)
+(Nécessite le Header HTTP 'Authorization: Bearer VOTRE_TOKEN_ADMIN')
